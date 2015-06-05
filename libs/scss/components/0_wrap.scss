@@ -1,0 +1,27 @@
+/*
+	Wrapping the entire site
+	------------------------
+	We use a .wrap class on areas that we want
+	to restrict the width of. So this loop
+	goes through our breakpoints located in
+	_breakpoints.scss
+*/
+
+.wrap {
+	width: 92%;
+	margin: 0 auto;
+
+  @include wider-than(base){
+    width: 96%;
+  }
+
+	/* For each breakpoint listed here, make a mediaquiery and a max-width of that breakpoint. */
+	@each $size in $breakpoints {
+		@include wider-than(#{nth($size, 1)}){ 	max-width: nth($size, 2);; }
+	}
+}
+
+
+/* Hide and Show depending if it's on mobile or not */
+.mobile-only{  display: block; @include wider-than(mobile){ display: none; }}
+.above-mobile{ display: none; @include wider-than(mobile){ display: block; }}

@@ -1,0 +1,104 @@
+/* Settings */
+
+$tab_width:     20%;
+$content_width: (100% - $tab_width); // Automatically worked out from tab with
+$tab_side:      left;
+
+@mixin positioning($top: 0, $right: 0, $bottom: 'auto', $left: 'auto'){
+  top: $top; 
+  right: $right; 
+  bottom: $bottom; 
+  left: $left;
+}
+
+.slide{ 
+  position: relative; 
+  float: left;
+  width: 100%;
+}
+
+// ==============================================
+// Hide the inputs, but change their behaviour
+input[type="radio"]{
+	margin: -1px;
+	padding: 0;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	clip: rect(0, 0, 0, 0);
+	position: absolute;
+}
+
+
+// ==============================================
+// Make them labels look nice
+label{
+  background-color: $brand-colour;
+  color: $white;
+  padding: 1rem;
+  display: inline-block;
+  width: $tab_width;
+  vertical-align: top;
+
+  @if ($tab_side == 'right'){
+    float: right; clear: right;
+  } @else {
+    float: left; clear: left; 
+  }
+}
+
+
+%absolute { 
+  position: absolute;
+}
+
+// ==============================================
+// Remove all content areas
+.content{ 
+  display: none;
+  padding: 1rem;
+  width: $content_width;
+  vertical-align: top;
+  height: 100%;
+  clear: both;
+  
+  @if ($tab_side == 'left'){
+    @include positioning(0, 0, auto, auto); 
+    @extend %absolute;
+  } @else {
+    @include positioning(0, auto, auto, 0); 
+    @extend %absolute;
+  }
+  
+  div{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    background-blend-mode: soft-light;
+    background-color: $brand-colour;
+  }
+
+
+}
+
+
+
+// ==============================================
+// A nice loop to catch all the tabs needed.
+@for $i from 1 through 10 {
+  #tab-#{$i}{
+    &:checked{
+      & + label{ background-color: darken($brand-colour, ($i * 2 + 0%)); }
+
+      // Target the content that relates to this tab
+      & ~ #content-#{$i} { 
+        display: block;
+        background-color: darken($brand-colour, ($i * 10 + 0%));
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+$ease-in-out-quint: cubic-bezier(0.860, 0.000, 0.070, 1.000);
+
+// We can change how the whole navigation animates here
+$easing:	$ease-in-out-quint;
+$timing:	0.45s;
+
+// Fading in product images as they are in view.
+
+// FORCE SPEED!
+div { 
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000;
+}
+
+div {
+  transition: 
+    top 0.24s $easing,
+    opacity $timing $easing,
+    transform $timing $easing;
+
+  &.is-not-visible {
+    opacity: 0;
+    transform: translate(-20px, 0);
+  }
+  &.is-visible {
+    opacity: 1;
+    transform: translate(0, 0);
+    // Delay
+    &:nth-of-type(2){transition-delay: 0.1s;}
+    &:nth-of-type(3){transition-delay: 0.2s;}
+    &:nth-of-type(4){transition-delay: 0.3s;}
+    &:nth-of-type(5){transition-delay: 0.4s;}
+    &:nth-of-type(6){transition-delay: 0.5s;}
+
+    @for $i from 1 through 20 {
+      &:nth-of-type(#{$i}){
+        transition-delay: ($i * 0.1)s;
+      } 
+    }
+  }
+}

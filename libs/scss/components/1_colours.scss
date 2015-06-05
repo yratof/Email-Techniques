@@ -1,0 +1,52 @@
+// Newsprint, black and white
+$black:		#000;
+$white:		#fff;
+
+
+// Map of colours
+$brand-colours-key: 'main' !default;
+$brand-colours: (
+  'brand': (
+    'main': #9edff4, // Dark Violet
+    'light': lighten(#201B2A, 6%), // light purple
+    'dark': darken(#201B2A, 6%) // Dark purple
+  ),
+  'accent': (
+    'main': #9ef4c8, // Yellow
+    'light': #EFE7B4 // Puss
+  ),
+  'highlight': (
+    'main': #ecbb36, // Red
+    'light': #F1C9CA, // lightest red ever
+    'dark': #9F0D12 // Dark Red
+  ),
+  'grey': (
+    'main': #c1c1c1, // Grey
+    'light': #e7e6e6,
+    'dark': #8B8989
+  )
+);
+
+// A function to get all these colour options out.
+// I'm sort of thinking it's overkill. But meh.
+@function colour($colour, $value: 'main') {
+    @return map-get(map-get($brand-colours, $colour), $value);
+}
+
+
+$brand-colour:		  colour('brand', 'main');
+$brand-highlight:	  colour('highlight', 'main');
+$brand-accent:		  colour('accent', 'main');
+$brand-grey:		    colour('grey', 'dark');
+$brand-grey-light:	colour('grey', 'light');
+
+$text-colour:		    #444;
+$disabled-grey:		  colour('grey', 'light');
+
+// Alerts
+$alert-yellow:	    #eb7209;
+$alert-red:			    #be3333;
+$alert-green:		    #a8c923;
+$alert-blue:		    #209dd6;
+
+$shadow: 	0 15px 5px -8px fade-out($black, 0.95), 0 9px 6px -7px fade-out($black, 0.55);
