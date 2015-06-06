@@ -1,1 +1,6 @@
-p{ @include baseline(16px); }
+p{ 
+  @include baseline(13px);
+  @include wider-than(tablet){
+     @include baseline(16px);
+  }
+}

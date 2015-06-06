@@ -26,25 +26,25 @@ $cap-height: 		0.68;
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6{
 	font-weight: 300;
-	margin: 0;
+	margin: 0 0 18px;
 }
 
 //====================
 h1, .h1{
 	@include modular(2.25rem);
-  @include baseline(36px);
+  
 }
 
 //====================
 h2, .h2{
 	@include modular(1.9375rem);
-  @include baseline(31px);
+
 }
 
 //====================
 h3, .h3{
 	@include modular(1.5rem);
-  @include baseline(24px);
+
 
 }
 

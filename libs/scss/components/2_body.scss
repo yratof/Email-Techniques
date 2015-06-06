@@ -10,7 +10,12 @@ body {
 	font-size: 100%;
 	line-height: 1.4;
 	font-weight: 200;
-  background-color: white;
+  background-color: darken(white, 5%);
+  padding: 0.25rem;
+
+  @include wider-than(tablet){
+    padding: 1.5rem;
+  }
 }
 
 // Links and other kinds of things
@@ -28,4 +33,13 @@ img{
   max-width: 100%;
   height: auto;
   vertical-align: bottom;
+}
+
+.email{
+  background-color: white;
+  padding: 0.5rem;
+
+  @include wider-than(tablet){
+    padding: 1.5rem;
+  }
 }

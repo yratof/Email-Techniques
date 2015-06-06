@@ -15,6 +15,7 @@ $tab_side:      left;
   position: relative; 
   float: left;
   width: 100%;
+  margin-bottom: 1.5rem;
 }
 
 // ==============================================
@@ -30,59 +31,68 @@ input[type="radio"]{
 	position: absolute;
 }
 
+$max_size: desktop;
 
 // ==============================================
 // Make them labels look nice
 label{
   background-color: $brand-colour;
-  color: $white;
-  padding: 1rem;
+  color: $text-colour;
   display: inline-block;
-  width: $tab_width;
   vertical-align: top;
-
-  @if ($tab_side == 'right'){
-    float: right; clear: right;
-  } @else {
-    float: left; clear: left; 
+  width: 33.3%;
+  padding: 0.5rem;
+  float: left;
+  transition: background-color 0.24s $easing;
+  
+  @include wider-than($max_size){
+    padding: 1rem;
+    width: $tab_width;
+    @if ($tab_side == 'right'){
+      float: right; clear: right;
+    } @else {
+      float: left; clear: left; 
+    }
   }
 }
 
 
-%absolute { 
-  position: absolute;
-}
+
 
 // ==============================================
 // Remove all content areas
 .content{ 
   display: none;
-  padding: 1rem;
-  width: $content_width;
   vertical-align: top;
   height: 100%;
-  clear: both;
-  
-  @if ($tab_side == 'left'){
-    @include positioning(0, 0, auto, auto); 
-    @extend %absolute;
-  } @else {
-    @include positioning(0, auto, auto, 0); 
-    @extend %absolute;
+  width: 100%;
+  position: relative;
+  @include clearfix;
+
+  @include wider-than($max_size){ 
+    width: $content_width;
+    @if ($tab_side == 'left'){
+      @include positioning(0, 0, auto, auto); 
+      position: absolute;
+    } @else {
+      @include positioning(0, auto, auto, 0); 
+      position: absolute;
+    }
   }
   
   div{
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
     padding: 1rem;
     background-blend-mode: soft-light;
     background-color: $brand-colour;
+
+    @include wider-than($max_size){
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
   }
-
-
 }
 
 
@@ -92,11 +102,12 @@ label{
 @for $i from 1 through 10 {
   #tab-#{$i}{
     &:checked{
-      & + label{ background-color: darken($brand-colour, ($i * 2 + 0%)); }
+      //& + label{ background-color: darken($brand-colour, ($i * 2 + 0%)); }
+      & + label{ background-color: darken($brand-colour, 20%); }
 
       // Target the content that relates to this tab
       & ~ #content-#{$i} { 
-        display: block;
+        display: inline-block;
         background-color: darken($brand-colour, ($i * 10 + 0%));
       }
     }

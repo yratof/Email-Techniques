@@ -3,10 +3,13 @@
   <head>
     <title>Tabbed Emails</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="libs/css/style.css" type="text/css" media="screen" charset="utf-8">
+<!--     <link rel="stylesheet" href="libs/css/style.css" type="text/css" media="screen" charset="utf-8"> -->
+  <style>
+    <!-- @import libs/css/style.css -->
+  </style>
   </head>
   <body>
-    <div class="wrap">
+    <div class="email wrap">
 
       <div class="clearfix">
         <h1>Email examples</h1>
@@ -41,5 +44,37 @@
         <p>foam sugar seasonal beans filter percolator french press. Pumpkin spice to go dark, robust half and half café au lait eu, white, cream chicory cultivar ristretto viennese. Medium milk espresso pumpkin spice half and half coffee iced trifecta cortado redeye macchiato pumpkin spice a espresso.</p>
       </div>
       
+      
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript">
+      jQuery(document).ready(function($){
+        // Making things happen when they're in view  
+        function isScrolledIntoView(elem) {
+            var docViewTop = $(window).scrollTop();
+            var docViewBottom = docViewTop + $(window).height();
+            var elemTop = $(elem).offset().top;
+            var elemBottom = elemTop + $(elem).height();
+            return ((elemTop <= docViewBottom) && (elemTop >= docViewTop));
+        }
+      
+        var $el = $('p');    
+        $el.each(function(){
+          if(!isScrolledIntoView($(this))){
+            $(this).addClass('is-not-visible');
+          }
+        });
+        
+        $(document).on('scroll', function(){
+          $('.is-not-visible').each(function(){
+            if(isScrolledIntoView($(this))){
+              $(this).removeClass('is-not-visible')
+                .addClass('is-visible');
+                //.css({ 'display' : 'none' }).fadeIn(700);
+            }
+          });
+        });
+      });
+    </script>
   </body>
 </html>
